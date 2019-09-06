@@ -32,8 +32,8 @@ const typeDefs = gql`
   type Mutation {
     addAuthor(data: addAuthorInput!): Author
     addPost(data: addPostInput!): Post
-    updatePost(data: updatePost): Post
-    updateAuthor(data: updateAuthor): Author
+    updatePost(data: updatePost): String
+    updateAuthor(data: updateAuthor): String
     deletePost(id: ID!): String
     addLike(id: ID!): String
   }

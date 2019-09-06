@@ -30,9 +30,12 @@ const resolvers = {
     },
 
     updatePost: async (_, { data }, context, info) => {
-      const findAndUpdate = await Post.findOne({ id: data.id });
-
-      if (findAndUpdate) return await Post.create(data);
+      // const findAndUpdate = await Post.findOne({ _id: data.id });
+      // if (findAndUpdate) {
+      //   const newData = await Post.update(data);
+      //   console.log(newData);
+      //   return "update successful";
+      // }
     },
 
     updateAuthor: async () => {},
