@@ -19,7 +19,7 @@ const postSchema = new Schema(
       type: Schema.Types.ObjectId
     }
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 const Post = mongoose.model("Post", postSchema);

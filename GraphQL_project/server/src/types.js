@@ -16,10 +16,10 @@ const typeDefs = gql`
     id: ID
     name: String
     username: String!
-    email: String
-    posts: Post
     createdAt: String
     updatedAt: String
+    email: String
+    posts: Post
   }
 
   type Query {
@@ -31,7 +31,11 @@ const typeDefs = gql`
 
   type Mutation {
     addAuthor(data: addAuthorInput!): Author
-    addPost(data: addPostInput): Post
+    addPost(data: addPostInput!): Post
+    updatePost(data: updatePost): Post
+    updateAuthor(data: updateAuthor): Author
+    deletePost(id: ID!): String
+    addLike(id: ID!): String
   }
 
   input addAuthorInput {
@@ -41,10 +45,26 @@ const typeDefs = gql`
     password: String!
   }
 
+  input updateAuthor {
+    name: String
+    username: String
+    password: String
+  }
+
   input addPostInput {
+    authorId: String!
     title: String!
     body: String
     isPublished: Boolean
   }
+
+  input updatePost {
+    authorId: String!
+    id: ID!
+    title: String
+    body: String
+    isPublished: Boolean
+  }
 `;
+
 module.exports = typeDefs;
