@@ -36,11 +36,29 @@ const resolvers = {
       //   console.log(newData);
       //   return "update successful";
       // }
+      // const author = await Author.findOne({ _id: data.authorId });
     },
 
-    updateAuthor: async () => {},
+    updateAuthor: async (_, { data }, context, info) => {
+      const author = await Author.findOne({ _id: data.authorId });
+      if (author) {
+        const authorUpdate = await Author.updateMany({
+          data: data.name,
+          data: data.username,
+          data: data.password
+        });
+        console.log(authorUpdate);
+        return "author updated";
+      }
+    },
 
-    deletePost: async () => {}
+    deletePost: async (_, { id }, context, info) => {
+      const deleteOnePost = await Post.deleteOne({ _id: id });
+      if (deleteOnePost) {
+        console.log(deleteOnePost);
+        return "Post deleted successfully";
+      }
+    }
   },
 
   Query: {
@@ -62,10 +80,10 @@ const resolvers = {
     },
 
     getPost: async (_, { id }, context, info) => {
-      if (!id)
-        throw new UserInputError(
-          "A user with the given email already exits..."
-        );
+      // if (!id)
+      //   throw new UserInputError(
+      //     "A user with the given email already exists..."
+      //   );
       return await Post.findOne({ _id: id }).populate({
         path: "author",
         model: "Author"

@@ -16,7 +16,7 @@ const authorSchema = new Schema(
     },
     email: {
       type: String,
-      requird: true,
+      required: true,
       trim: true,
       unique: true,
       minlength: 8

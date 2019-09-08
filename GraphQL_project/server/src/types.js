@@ -46,6 +46,7 @@ const typeDefs = gql`
   }
 
   input updateAuthor {
+    authorId: String!
     name: String
     username: String
     password: String
