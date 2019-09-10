@@ -30,26 +30,56 @@ const resolvers = {
     },
 
     updatePost: async (_, { data }, context, info) => {
-      // const findAndUpdate = await Post.findOne({ _id: data.id });
-      // if (findAndUpdate) {
-      //   const newData = await Post.update(data);
-      //   console.log(newData);
-      //   return "update successful";
-      // }
-      // const author = await Author.findOne({ _id: data.authorId });
+      // const postToUpdate = await Post.findByIdAndUpdate(
+      //   { _id: data.authorId },
+      //   data
+      // );
+      // return "update successful";
+
+      if (!data) throw new UserInputError("no data available");
+
+      const foundPost = await Post.findOne({ _id: data.id });
+
+      if (foundPost.author.equals(data.authorId)) {
+        const updateData = {
+          title: data.title,
+          body: data.body,
+          isPublished: data.isPublished
+        };
+        const updatedPost = await Post.updateOne({ _id: data.id }, updateData, {
+          new: true
+        });
+
+        if (updatedPost.ok === 1) {
+          return "Post updated successfully";
+        } else {
+          ("Cannot update post");
+        }
+      }
+
+      throw new AuthenticationError("You are not the author of this post.");
     },
 
     updateAuthor: async (_, { data }, context, info) => {
-      const author = await Author.findOne({ _id: data.authorId });
-      if (author) {
-        const authorUpdate = await Author.updateMany({
-          data: data.name,
-          data: data.username,
-          data: data.password
-        });
+      const updatedAuthor = {
+        name: data.name,
+        username: data.username,
+        password: data.password
+      };
+      const authorUpdate = await Author.updateOne(
+        { _id: data.authorId },
+        updatedAuthor,
+        { new: true }
+      );
+
+      if (authorUpdate.ok === 1) {
         console.log(authorUpdate);
         return "author updated";
+      } else {
+        ("cannot update author");
       }
+
+      throw new AuthenticationError("This author does not exist");
     },
 
     deletePost: async (_, { id }, context, info) => {
@@ -57,6 +87,19 @@ const resolvers = {
       if (deleteOnePost) {
         console.log(deleteOnePost);
         return "Post deleted successfully";
+      }
+    },
+
+    addLike: async (_, { id }, context, info) => {
+      const post = await Post.findOne({ _id: id });
+      if (post) {
+        const data = {
+          likes: +1
+        };
+        await Post.updateOne({ _id: id }, data, {
+          new: true
+        });
+        return "post liked";
       }
     }
   },

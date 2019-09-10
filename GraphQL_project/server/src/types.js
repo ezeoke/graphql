@@ -33,7 +33,7 @@ const typeDefs = gql`
     addAuthor(data: addAuthorInput!): Author
     addPost(data: addPostInput!): Post
     updatePost(data: updatePost): String
-    updateAuthor(data: updateAuthor): String
+    updateAuthor(data: updateAuthor): Author
     deletePost(id: ID!): String
     addLike(id: ID!): String
   }
@@ -46,7 +46,6 @@ const typeDefs = gql`
   }
 
   input updateAuthor {
-    authorId: String!
     name: String
     username: String
     password: String
