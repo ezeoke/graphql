@@ -1,12 +1,16 @@
 {
-	"test": {
-		"SECRET_KEY": "12adf9023as*32$enDOFilE^_PerMeat",
-		"MONGODB_URI": "mongodb://localhost:27017/gql-server",
-		"PORT": 6301
-	},
-	"development": {
-		"SECRET_KEY": "12adf9023as*32$enDOFilE^_PerMeat",
-		"MONGODB_URI": "mongodb://localhost:27017/gql-server",
-		"PORT": 6301
-	}
+  "test": {
+    "SECRET_KEY": "12adf9023as*32$enDOFilE^_PerMeat",
+    "MONGODB_URI": "mongodb://localhost:27017/gql-server",
+    "BASE_URL": "http://localhost:3000",
+    "PORT": 6301,
+    "SALT_ROUND": 13
+  },
+  "development": {
+    "SECRET_KEY": "12adf9023as*32$enDOFilE^_PerMeat",
+    "MONGODB_URI": "mongodb://localhost:27017/gql-server",
+    "BASE_URL": "http://localhost:3000",
+    "PORT": 6301,
+    "SALT_ROUND": 13
+  }
 }

@@ -1,9 +1,12 @@
 require("./src/config/config");
-const { ApolloServer } = require("apollo-server");
 const { PORT, MONGODB_URI } = process.env;
+const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
 const typeDefs = require("./src/types");
 const resolvers = require("./src/resolvers");
+const dataSources = require("./src/datasources");
+
+const { getAuthor } = require("./src/utils/getAuth");
 
 const options = {
   useCreateIndex: true,
@@ -21,7 +24,15 @@ mongoose
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: async ({ req }) => {
+    const token = req.headers.authorization || "";
+
+    const AuthUser = await getAuthor(token);
+
+    return { AuthUser };
+  },
+  dataSources: () => dataSources
 });
 
 server
