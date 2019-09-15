@@ -19,7 +19,7 @@ module.exports = gql`
   extend type Mutation {
     login(data: loginInput): String
     addAuthor(data: addAuthorInput!): String
-    updateAuthor(data: updateAuthor): Author
+    updateAuthor(data: updateAuthor): String
   }
 
   input addAuthorInput {
@@ -30,6 +30,7 @@ module.exports = gql`
   }
 
   input updateAuthor {
+    authorId: ID!
     name: String
     username: String
     password: String

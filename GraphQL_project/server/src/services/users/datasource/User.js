@@ -1,5 +1,6 @@
 const Author = require("../../../models/user/authors.schema");
 const Base = require("../../../base");
+const { AuthenticationError } = require("apollo-server");
 
 class User extends Base {
   // Mutations for the user OR Author
@@ -11,31 +12,33 @@ class User extends Base {
         "A user with the given email already exits..."
       );
 
-    // data.password = await this.hashPassword(data.password);
+    data.password = await this.hashPassword(data.password);
 
     const user = await Author.create(data);
 
-    // if (user) {
-    //   user.emailVerificationToken = await this.getEmailVerifierToken(
-    //     user.username
-    //   );
-    //   await user.save();
-
-    //   const message = await this.getEVTTemplate(
-    //     "Registration was successful",
-    //     user.emailVerificationToken
-    //   );
-    //   const subject = "Account Verification";
-
-    //   this.sendMail(user.email, message, subject);
-
-    // if (user) {
-    return "Registration Successful";
-    // }
+    return user ? "User successfully created" : new Error(e.message);
   }
 
   async updateAuthor(data) {
-    // update author here
+    const updatedAuthor = {
+      name: data.name,
+      username: data.username,
+      password: data.password
+    };
+    const authorUpdate = await Author.updateOne(
+      { _id: data.authorId },
+      updatedAuthor,
+      { new: true }
+    );
+
+    if (authorUpdate.ok === 1) {
+      console.log(authorUpdate);
+      return "author updated";
+    } else {
+      ("cannot update author");
+    }
+
+    throw new AuthenticationError("This author does not exist");
   }
 
   async login(data) {
