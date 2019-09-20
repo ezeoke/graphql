@@ -1,6 +1,7 @@
 const PostModel = require("../../../models/posts/posts.schema");
 const Author = require("../../../models/user/authors.schema");
 const Base = require("../../../base");
+const { AuthenticationError } = require("apollo-server");
 
 class Post extends Base {
   // Mutations for POst
