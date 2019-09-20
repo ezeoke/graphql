@@ -15,10 +15,7 @@ export const ADD_POST = gql`
         isPublished: $isPublished
       }
     ) {
-      id
-      title
       body
-      isPublished
     }
   }
 `;
