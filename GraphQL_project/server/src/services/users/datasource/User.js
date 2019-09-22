@@ -1,15 +1,20 @@
 const Author = require("../../../models/user/authors.schema");
 const Base = require("../../../base");
-const { AuthenticationError } = require("apollo-server");
+const { AuthenticationError, Error } = require("apollo-server");
 
 class User extends Base {
   // Mutations for the user OR Author
   async addAuthor(data) {
     const foundAuthor = await Author.findOne({ email: data.email });
+    const foundUser = await Author.findOne({ username: data.username });
 
-    if (foundAuthor)
+    if (foundAuthor) {
       throw new AuthenticationError(
         "A user with the given email already exits..."
+      );
+    } else if (foundUser)
+      throw new AuthenticationError(
+        "A user with the given username already exits..."
       );
 
     data.password = await this.hashPassword(data.password);
@@ -44,10 +49,7 @@ class User extends Base {
   async login(data) {
     const user = Author.findOne({ email: data.email });
 
-    const isValid = await this.comparePassword(
-      data.password,
-      foundUser.password
-    );
+    const isValid = await this.comparePassword(data.password, user.password);
 
     if (isValid) {
       const payload = {
@@ -68,7 +70,7 @@ class User extends Base {
 
   // Queries
   async getAuthor(id) {
-    const foundUser = await Author.findById(id);
+    const foundUser = await Author.findOne({ _id: id });
 
     if (!foundUser) throw new Error("user with ID does not exist");
 
