@@ -44,12 +44,14 @@ const AddPost = () => {
           name="title"
           onChange={handleChange}
         />
+        <br />
         <input
           type="text"
           value={postState.body}
           name="body"
           onChange={handleChange}
         />
+        <br />
         <button>Publish</button>
         {/* <button onClick={handleSaveDraft}>Save Draft</button> */}
       </form>

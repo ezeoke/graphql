@@ -10,6 +10,10 @@ const postResolver = {
 
     deletePost: async (_, { data }, { dataSources: { Post } }) => {
       return await new Post().deletePost(data);
+    },
+
+    deleteAuthorPosts: async (_, { id }, { dataSources: { Post } }) => {
+      return await new Post().deleteAuthorPosts(id);
     }
   },
 

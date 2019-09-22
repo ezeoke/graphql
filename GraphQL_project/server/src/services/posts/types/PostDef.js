@@ -20,22 +20,28 @@ module.exports = gql`
   extend type Mutation {
     addPost(data: addPostInput!): Post
     updatePost(data: updatePost): String
-    deletePost(id: ID!): String
+    deletePost(data: deletePost): String
+    deleteAuthorPosts(id: ID!): String
     addLike(id: ID!): String
   }
 
   input addPostInput {
-    authorId: String!
+    authorId: ID!
     title: String!
     body: String
     isPublished: Boolean
   }
 
   input updatePost {
-    authorId: String!
+    authorId: ID!
     id: ID!
     title: String
     body: String
     isPublished: Boolean
+  }
+
+  input deletePost {
+    authorId: ID!
+    id: ID!
   }
 `;

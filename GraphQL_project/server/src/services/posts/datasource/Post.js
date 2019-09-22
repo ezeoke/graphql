@@ -1,7 +1,7 @@
 const PostModel = require("../../../models/posts/posts.schema");
 const Author = require("../../../models/user/authors.schema");
 const Base = require("../../../base");
-const { AuthenticationError } = require("apollo-server");
+const { AuthenticationError, UserInputError, Error } = require("apollo-server");
 
 class Post extends Base {
   // Mutations for POst
@@ -46,8 +46,42 @@ class Post extends Base {
     throw new AuthenticationError("You are not the author of this post.");
   }
 
-  async deletePost(id) {
-    // delete a post
+  async deletePost(data) {
+    if (!data) throw new UserInputError("no data available");
+
+    const foundPost = await PostModel.findOne({ _id: data.id });
+
+    if (!foundPost) {
+      return "Post does not exist";
+    } else if (foundPost.author.equals(data.authorId)) {
+      const postDelete = await PostModel.deleteOne({ _id: data.id });
+
+      if (postDelete.ok === 1) {
+        return "Post deleted successfully";
+      } else {
+        ("Cannot delete post");
+      }
+    }
+
+    throw new AuthenticationError("You are not the author of this post.");
+  }
+
+  async deleteAuthorPosts(id) {
+    if (!id) throw new UserInputError("no data available");
+
+    // let btn = confirm("Do you want to delete all posts?");
+    const author = await Author.findOne({ _id: id });
+
+    // if (btn == true) {
+    if (author) {
+      const postsDelete = await author.posts;
+      console.log(postsDelete);
+      const deleteAll = await PostModel.deleteMany({ _id: postsDelete });
+      if (deleteAll.ok === 1) {
+        return "posts deleted";
+      }
+    }
+    // }
   }
 
   // Query

@@ -2,7 +2,7 @@ const Author = require("../../../models/user/authors.schema");
 const Base = require("../../../base");
 const { AuthenticationError } = require("apollo-server");
 
-class User {
+class User extends Base {
   // Mutations for the user OR Author
   async addAuthor(data) {
     const foundAuthor = await Author.findOne({ email: data.email });
