@@ -17,9 +17,15 @@ module.exports = gql`
   }
 
   extend type Mutation {
-    login(data: loginInput): String
+    login(data: loginInput): loginResponse
     addAuthor(data: addAuthorInput!): String
     updateAuthor(data: updateAuthor): String
+    deleteAuthor(id: ID!): String
+  }
+
+  type loginResponse {
+    code: Int
+    token: String
   }
 
   input addAuthorInput {

@@ -9,7 +9,11 @@ const userResolver = {
     },
 
     login: async (_, { data }, { dataSources: { User } }) => {
-      return await new User().loginUser(data);
+      return await new User().login(data);
+    },
+
+    deleteAuthor: async (_, { id }, { dataSources: { User } }) => {
+      return await new User().deleteAuthor(id);
     }
   },
 

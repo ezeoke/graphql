@@ -23,7 +23,7 @@ const AddPost = () => {
       addPost({
         variables: {
           ...postState,
-          authorId: "5d6d364f1e13fe2d8fdc10b5",
+          authorId: "5d8648ca39a433185534efd0",
           isPublished: true
         }
       });
@@ -58,6 +58,8 @@ const AddPost = () => {
     </div>
   );
 };
+
+export default AddPost;
 
 {
   /* <form
@@ -167,5 +169,3 @@ const AddPost = () => {
 
 // 	</Formik>
 // }
-
-export default AddPost;

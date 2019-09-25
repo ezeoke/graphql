@@ -8,6 +8,17 @@ const client = new ApolloClient({
   uri: "http://localhost:6301"
 });
 
+const AppSet = () => (
+  <ApolloProvider client={client}>
+    <div>
+      {/* <h2>My first Apollo app</h2> */}
+      <App />
+    </div>
+  </ApolloProvider>
+);
+
+ReactDOM.render(<AppSet />, document.getElementById("root"));
+
 // client
 //   .query({
 //     query: gql`
@@ -54,14 +65,3 @@ const client = new ApolloClient({
 //   );
 // });
 // }
-
-const AppSet = () => (
-  <ApolloProvider client={client}>
-    <div>
-      <h2>My first Apollo app</h2>
-      <App />
-    </div>
-  </ApolloProvider>
-);
-
-ReactDOM.render(<AppSet />, document.getElementById("root"));

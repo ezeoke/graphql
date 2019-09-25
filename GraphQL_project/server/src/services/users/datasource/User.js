@@ -47,7 +47,7 @@ class User extends Base {
   }
 
   async login(data) {
-    const user = Author.findOne({ email: data.email });
+    const user = await Author.findOne({ email: data.email });
 
     const isValid = await this.comparePassword(data.password, user.password);
 
@@ -65,6 +65,16 @@ class User extends Base {
       };
     } else {
       throw new Error("Invalid Password");
+    }
+  }
+
+  async deleteAuthor(id) {
+    const author = await Author.findByIdAndDelete({ _id: id });
+
+    if (author) {
+      return "author deleted successfully";
+    } else {
+      return "Cannot delete author";
     }
   }
 

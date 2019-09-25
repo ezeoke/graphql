@@ -36,9 +36,7 @@ export const UPDATE_POST = gql`
         body: $body
         isPublished: $isPublished
       }
-    ) {
-      String
-    }
+    )
   }
 `;
 
@@ -47,5 +45,32 @@ export const DELETE_POST = gql`
     deletePost(id: $id) {
       String
     }
+  }
+`;
+
+export const LOGIN_USER = gql`
+  mutation($email: String!, $password: String!) {
+    login(data: { email: $email, password: $password }) {
+      code
+      token
+    }
+  }
+`;
+
+export const ADD_AUTHOR = gql`
+  mutation(
+    $name: String
+    $username: String!
+    $email: String!
+    $password: passsword!
+  ) {
+    addAuthor(
+      data: {
+        name: $name
+        username: $username
+        password: $password
+        email: $email
+      }
+    )
   }
 `;

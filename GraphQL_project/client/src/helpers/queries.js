@@ -20,3 +20,9 @@ export const GET_POST = gql`
     }
   }
 `;
+
+export const VERIFY_EMAIL = gql`
+  mutation($emailToken: String!) {
+    verifyEmail(emailToken: $emailToken)
+  }
+`;

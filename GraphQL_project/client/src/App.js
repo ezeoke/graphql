@@ -1,16 +1,23 @@
 import React from "react";
-import logo from "./logo.svg";
-import GetAllPosts from "./components/dashboard/posts/getAllPosts";
-import GetPost from "./components/dashboard/posts/getPost";
-import AddPost from "./components/dashboard/users/addPost";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./views/Login";
+import Signup from "./views/Signup";
+import PrivateRoute from "./components/auth/PrivateRoute";
+import DashBoard from "./views/DashBoard";
+import Splash from "./views/Splash";
+import EmailVerification from "./views/EmailVerification";
 
 const App = () => {
   return (
-    <div className="App">
-      {/* <GetAllPosts /> */}
-      {/* <GetPost /> */}
-      <AddPost />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Splash} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/verify-email" component={EmailVerification} />
+        <PrivateRoute path="/dashboard" component={DashBoard} />
+      </Switch>
+    </BrowserRouter>
   );
 };
 
