@@ -61,8 +61,7 @@ const AddPost = () => {
 
 export default AddPost;
 
-{
-  /* <form
+/* <form
       onSubmit={e => {
         e.preventDefault();
         addPost({
@@ -77,7 +76,6 @@ export default AddPost;
     >
       <input />
     </form> */
-}
 
 // const SchemaValidation = Yup.object().shape({
 // 	authorId: Yup.string().required('author Id is required'),

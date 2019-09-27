@@ -1,11 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider, useQuery } from "@apollo/react-hooks";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
 import App from "./App";
 
+const token = localStorage.getItem("auth_token") || "";
+
+const cache = new InMemoryCache();
+
 const client = new ApolloClient({
-  uri: "http://localhost:6301"
+  uri: "http://localhost:6301/graphql",
+  cache,
+  headers: {
+    authorization: token
+  }
 });
 
 const AppSet = () => (

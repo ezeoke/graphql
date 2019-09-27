@@ -14,6 +14,7 @@ class Utils {
   async comparePassword(password, savedPassword) {
     return await bcrypt.compare(password, savedPassword);
   }
+
   async getEmailVerifierToken(payload) {
     return await jwt.sign({ payload }, SECRET_KEY, { expiresIn: "5m" });
   }

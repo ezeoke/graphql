@@ -63,9 +63,9 @@ class User extends Base {
         code: 200,
         token
       };
-    } else {
-      throw new Error("Invalid Password");
     }
+
+    throw new AuthenticationError("This email or password is not correct");
   }
 
   async deleteAuthor(id) {
@@ -75,6 +75,26 @@ class User extends Base {
       return "author deleted successfully";
     } else {
       return "Cannot delete author";
+    }
+  }
+
+  async verifyEmail(data) {
+    const isValid = await this.verifyEmailToken(data);
+
+    if (isValid) {
+      const user = await User.findOne({ emailVerificationToken: data });
+
+      // if (user.isVerified)
+      //   return "User is already verified, please continue to login...";
+
+      if (user) {
+        user.emailVerificationToken = null;
+        // user.isVerified = true;
+
+        await user.save();
+
+        return "🚀 Verification Successful";
+      }
     }
   }
 

@@ -7,14 +7,12 @@ import DashBoardHome from "../components/dashboard/DashBoardHome";
 
 const DashBoard = () => (
   <BrowserRouter>
-    <div>
-      <Switch>
-        <Route exact path="/dashboard" component={DashBoardHome} />
-        <Route path="/dashboard/add-post" component={AddPost} />
-        <Route path="/dashboard/get-all-post" component={GetAllPosts} />
-        <Route path="/dashboard/get-post" component={GetPost} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/dashboard" component={DashBoardHome} />
+      <Route path="/dashboard/add-post" component={AddPost} />
+      <Route path="/dashboard/get-all-posts" component={GetAllPosts} />
+      <Route path="/dashboard/get-post" component={GetPost} />
+    </Switch>
   </BrowserRouter>
 );
 

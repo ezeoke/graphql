@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { GET_POST } from "../../../helpers/queries";
 
 const GetPost = () => {
@@ -10,13 +10,15 @@ const GetPost = () => {
 
   const handleGetPost = async () => {
     await getPost({
-      variables: { id: "5d74865ab4bb230f7c6d4f4d" }
+      variables: { id: "5d8cbc379dc1c7152f2ff33a" }
     });
   };
 
   // if (data && data.getPost) {
   //   setPost(data.getPost);
   // }
+
+  console.log("daat", data);
 
   useEffect(() => {
     data && setPost(data.getPost);

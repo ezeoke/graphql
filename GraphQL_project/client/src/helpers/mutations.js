@@ -62,7 +62,7 @@ export const ADD_AUTHOR = gql`
     $name: String
     $username: String!
     $email: String!
-    $password: passsword!
+    $password: String!
   ) {
     addAuthor(
       data: {

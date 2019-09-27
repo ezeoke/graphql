@@ -6,16 +6,16 @@ import { VERIFY_EMAIL } from "../helpers/queries";
 const EmailVerification = ({ location, history }) => {
   const [verifyEmail] = useMutation(VERIFY_EMAIL);
 
-  useEffect(() => {
-    const { search } = location;
-    const token = search.split("=")[1];
+  // useEffect(() => {
+  const { search } = location;
+  const token = search.split("=")[1];
 
-    verifyEmail({
-      variables: { emailToken: token }
-    }).then(() => {
-      history.push("/login");
-    });
+  verifyEmail({
+    variables: { emailToken: token }
+  }).then(() => {
+    history.push("/login");
   });
+  // });
 
   return (
     <div>

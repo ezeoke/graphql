@@ -23,12 +23,10 @@ mongoose
   });
 
 const server = new ApolloServer({
-  cors: true,
   typeDefs,
   resolvers,
   context: async ({ req }) => {
     const token = req.headers.authorization || "";
-
     const AuthUser = await getAuthor(token);
 
     return { AuthUser };

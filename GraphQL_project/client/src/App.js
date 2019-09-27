@@ -6,6 +6,7 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import DashBoard from "./views/DashBoard";
 import Splash from "./views/Splash";
 import EmailVerification from "./views/EmailVerification";
+import GetAllPosts from "./components/dashboard/posts/getAllPosts";
 
 const App = () => {
   return (
@@ -20,5 +21,11 @@ const App = () => {
     </BrowserRouter>
   );
 };
+
+// class App extends React.Component {
+//   render() {
+//     return <GetAllPosts />;
+//   }
+// }
 
 export default App;
