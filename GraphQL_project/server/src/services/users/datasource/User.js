@@ -78,11 +78,11 @@ class User extends Base {
     }
   }
 
-  async verifyEmail(data) {
-    const isValid = await this.verifyEmailToken(data);
+  async verifyEmail(emailToken) {
+    const isValid = await this.verifyEmailToken(emailToken);
 
     if (isValid) {
-      const user = await User.findOne({ emailVerificationToken: data });
+      const user = await User.findOne({ emailVerificationToken: emailToken });
 
       // if (user.isVerified)
       //   return "User is already verified, please continue to login...";
@@ -109,6 +109,66 @@ class User extends Base {
 
   async getAuthors() {
     return await Author.find({});
+  }
+
+  async resendEmailVerification(id) {
+    try {
+      const foundUser = await User.findById(id);
+
+      if (!foundUser) throw new Error("User not found");
+
+      if (foundUser.isVerified)
+        return "You have already been verified. Please continue to login...";
+
+      foundUser.emailVerificationToken = await this.getEmailVerifierToken(id);
+
+      await foundUser.save();
+
+      const message = await this.getEVTTemplate(
+        "Email Verification",
+        foundUser.emailVerificationToken,
+        "resend"
+      );
+      const subject = "Account Verification";
+
+      this.sendMail(foundUser.email, message, subject);
+
+      return "Your verification token has been sent successfully, Check your email to continue";
+    } catch (e) {
+      throw new Error("Ivalid post ID");
+    }
+  }
+
+  /*
+   * sendEmailVerification
+   * @params: ID
+   * returns: a string
+   */
+  async sendEmailVerification(id) {
+    try {
+      const foundUser = await User.findById(id);
+
+      if (!foundUser) throw new Error("User not found");
+
+      if (foundUser.isVerified) return "Already verified";
+
+      foundUser.emailVerificationToken = await this.getEmailVerifierToken(id);
+
+      await foundUser.save();
+
+      const message = await this.getEVTTemplate(
+        "Email Verification",
+        foundUser.emailVerificationToken,
+        "resend"
+      );
+      const subject = "Account Verification";
+
+      this.sendMail(foundUser.email, message, subject);
+
+      return "Your verification token has been sent successfully, Check your email to continue";
+    } catch (e) {
+      throw new Error("Ivalid post ID");
+    }
   }
 }
 

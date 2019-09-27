@@ -21,13 +21,11 @@ const Login = props => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (log.email && log.password) {
-      const {
-        data: { code, token }
-      } = await login({ variables: { ...log } });
+      const { data } = await login({ variables: { ...log } });
 
-      localStorage.setItem("auth_token", login.token);
-
-      const user = getUser(login.token);
+      localStorage.setItem("auth_token", data.login.token);
+      // console.log(data.login.token, "token");
+      const user = getUser(data.login.token);
 
       const location = {
         pathname: "/dashboard",

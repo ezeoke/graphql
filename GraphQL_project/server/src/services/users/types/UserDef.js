@@ -14,10 +14,13 @@ module.exports = gql`
   extend type Query {
     getAuthors: [Author]
     getAuthor(id: ID!): Author
+    resendEmailVerification(id: ID!): String!
+    sendEmailVerification(id: ID!): String!
   }
 
   extend type Mutation {
     login(data: loginInput): loginResponse
+    verifyEmail(emailToken: String!): String!
     addAuthor(data: addAuthorInput!): String
     updateAuthor(data: updateAuthor): String
     deleteAuthor(id: ID!): String

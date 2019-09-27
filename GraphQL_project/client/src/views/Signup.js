@@ -13,15 +13,20 @@ const Signup = props => {
     setUser({ [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (user.name && user.username && user.password && user.email) {
-      addAuthor({
+      const { data } = await addAuthor({
         variables: {
           ...user
         }
       });
-      // console.log(user);
+
+      setUser({ name: "", username: "", email: "", password: "" });
+      const location = { pathname: "/login" };
+      if (data) {
+        props.history.push(location);
+      }
     }
   };
 

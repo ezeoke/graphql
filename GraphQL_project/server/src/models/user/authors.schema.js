@@ -26,6 +26,9 @@ const authorSchema = new Schema(
       required: true,
       minlength: 4
     },
+    emailVerificationToken: {
+      type: String
+    },
     posts: [
       {
         type: Schema.Types.ObjectId
