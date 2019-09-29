@@ -33,12 +33,14 @@ const postResolver = {
 
   postQuery: {
     getAllPosts: async (_, args, { AuthUser, dataSources: { Post } }) => {
-      if (!AuthUser) throw new Error("You are not Authenticated...");
+      if (!AuthUser)
+        throw new AuthenticationError("You are not Authenticated...");
       return await new Post().getAllPosts();
     },
 
     getPost: async (_, { id }, { AuthUser, dataSources: { Post } }) => {
-      if (!AuthUser) throw new Error("You are not Authenticated...");
+      if (!AuthUser)
+        throw new AuthenticationError("You are not Authenticated...");
       return await new Post().getPost(id);
     }
   }

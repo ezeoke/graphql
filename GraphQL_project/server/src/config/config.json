@@ -4,13 +4,17 @@
     "MONGODB_URI": "mongodb://localhost:27017/gql-server",
     "BASE_URL": "http://localhost:3000",
     "PORT": 6301,
-    "SALT_ROUND": 13
+    "SALT_ROUND": 13,
+    "SENDGRID_API_KEY": "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 ",
+    "SENDGRID_USER": "steve.inc"
   },
   "development": {
     "SECRET_KEY": "12adf9023as*32$enDOFilE^_PerMeat",
     "MONGODB_URI": "mongodb://localhost:27017/gql-server",
     "BASE_URL": "http://localhost:3000",
     "PORT": 6301,
-    "SALT_ROUND": 13
+    "SALT_ROUND": 13,
+    "SENDGRID_API_KEY": "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 ",
+    "SENDGRID_USER": "steve.inc"
   }
 }

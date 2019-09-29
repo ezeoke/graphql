@@ -21,7 +21,6 @@
     "graphql-type-json": "^0.3.0",
     "jsonwebtoken": "^8.5.1",
     "mailgun-js": "^0.22.0",
-    "mongoose": "^5.6.11",
-    "nodemailer": "^6.3.0"
+    "mongoose": "^5.6.11"
   }
 }

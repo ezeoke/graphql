@@ -45,8 +45,18 @@ const Login = props => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="email" onChange={handleChange} />
-        <input type="text" name="password" onChange={handleChange} />
+        <input
+          type="text"
+          name="email"
+          value={log.email}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="password"
+          value={log.password}
+          onChange={handleChange}
+        />
         <button>submit</button>
       </form>
 

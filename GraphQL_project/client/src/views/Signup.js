@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { ADD_AUTHOR } from "../helpers/mutations";
 import { useMutation } from "@apollo/react-hooks";
 
@@ -8,6 +8,8 @@ const Signup = props => {
     (state, newState) => ({ ...state, ...newState }),
     { name: "", username: "", email: "", password: "" }
   );
+
+  const [word, setWord] = useState("");
 
   const handleChange = e => {
     setUser({ [e.target.name]: e.target.value });
@@ -39,7 +41,13 @@ const Signup = props => {
           value={user.name}
           placeholder="name"
           onChange={handleChange}
+          onBlur={() => {
+            let re = /\d+/;
+            let check = re.exec(user.name);
+            !check ? setWord("Please input the right text") : setWord("");
+          }}
         />
+        <p>{word}</p>
         <input
           type="text"
           name="username"
